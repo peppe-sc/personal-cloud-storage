@@ -1,3 +1,5 @@
 proxy_server/target
 
 proxy_server/Cargo.lock
+
+proxy_server/.idea
