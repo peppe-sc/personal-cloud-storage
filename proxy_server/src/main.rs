@@ -34,7 +34,7 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for MyWs {
     }
 }
 
-async fn index(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
+async fn echo_ws_route(req: HttpRequest, stream: web::Payload) -> Result<HttpResponse, Error> {
     
     let resp = ws::start(MyWs {}, &req, stream);
     println!("{:?}", resp);
@@ -47,14 +47,7 @@ async fn hello() -> impl Responder {
     HttpResponse::Ok().body("Hello world!")
 }
 
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
-}
 
-async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey there!")
-}
 
 /// Entry point for our websocket route
 async fn ws_route(
@@ -90,8 +83,6 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::Data::new(server.clone()))
             .route("/ws", web::get().to(ws_route))
             .service(hello)
-            .service(echo)
-            .route("/hey", web::get().to(manual_hello))
     })
     .bind((/*"172.31.3.97"*/"localhost", 80))?
     .run()

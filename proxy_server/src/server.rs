@@ -1,9 +1,6 @@
 use std::{
-    collections::{HashMap,HashSet},
-    sync::{
-        atomic::{AtomicUsize,Ordering},
-        Arc,
-    }
+    collections::{HashMap},
+
 };
 
 enum Actors{
@@ -118,8 +115,6 @@ impl Handler<Disconnect> for ProxyServer {
 
     fn handle(&mut self, msg: Disconnect, _: &mut Context<Self>) {
         println!("Someone disconnected");
-
-        let mut rooms: Vec<String> = Vec::new();
 
         // remove address
         self.sessions.remove(&msg.id);

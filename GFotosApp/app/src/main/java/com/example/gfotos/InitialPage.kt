@@ -13,13 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-@Preview
-fun InitialPage(){
+fun InitialPage(navController: NavController){
 
-    val navController = rememberNavController()
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -27,7 +27,7 @@ fun InitialPage(){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("client") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
@@ -35,7 +35,7 @@ fun InitialPage(){
             Text(text = "Client", style = MaterialTheme.typography.displayLarge)
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("server") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(20.dp)
